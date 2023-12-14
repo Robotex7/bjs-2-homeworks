@@ -27,39 +27,39 @@ class PrintEditionItem {
 }
 
 class Magazine extends PrintEditionItem {
-    constructor(name, releaseDate, pagesCount) {
-            super(name, releaseDate, pagesCount);
-            this.type = "magazine";
-    }
+	constructor(name, releaseDate, pagesCount){
+		super(name, releaseDate, pagesCount);
+		this.type = "magazine";
+	}
 }
 
 class Book extends PrintEditionItem {
-        constructor(author, name, releaseDate, pagesCount) {
-            super(name, releaseDate, pagesCount);
+	constructor(author, name, releaseDate, pagesCount){
+		super(name, releaseDate, pagesCount);
         this.author = author;
-            this.type = "book";
-        }
+		this.type = "book";
+	}
 }
 
 class NovelBook extends Book {
-    constructor(author, name, releaseDate, pagesCount) {
-            super(author, name, releaseDate, pagesCount);
-            this.type = "novel";
-    }
+	constructor(author, name, releaseDate, pagesCount){
+		super(author, name, releaseDate, pagesCount);
+		this.type = "novel";
+	}
 }
 
 class FantasticBook extends Book {
-        constructor(author, name, releaseDate, pagesCount) {
-                super(author, name, releaseDate, pagesCount);
-                this.type = "fantastic";
-        }
+	constructor(author, name, releaseDate, pagesCount){
+		super(author, name, releaseDate, pagesCount);
+		this.type = "fantastic";
+	}
 }
 
 class DetectiveBook extends Book {
-        constructor(author, name, releaseDate, pagesCount) {
-                super(author, name, releaseDate, pagesCount);
-                this.type = "detective";
-        }
+	constructor(author, name, releaseDate, pagesCount){
+		super(author, name, releaseDate, pagesCount);
+		this.type = "detective";
+	}
 }
 
 class Library {
@@ -81,11 +81,11 @@ class Library {
     }
 
     giveBookByName(bookName) {
-        if (!this.book.find(book => book.name === bookName)) {
+        if (!this.books.find(book => book.name === bookName)) {
             return null;
         }
-        for (let i = 0; i < this.books.length; i++) {
-            if (this.books[i].name === bookName) {
+        for (let i = 0; i < this.books.length; i++) {    
+            if (this.books[i].name === bookName) {   
                 let book = this.books.splice(i, 1);
                 return book[0];
             }
@@ -97,27 +97,27 @@ class Student {
     constructor(name) {
         this.name = name;
         this.marks = {};
-    }
+    }    
     addMark(mark, subject) {
         if (mark < 2 || mark > 5) {
             return;
         };
-        if (this.marks.hasOwnProperty(subject)) {
+        if (!this.marks.hasOwnProperty(subject)) {
             this.marks[subject] = [];
         };
-        this.marks[subject].push(mark);
+        this.marks[subject].push(mark)
     }
 
     getAverageBySubject(subject) {
-        if(!this.marks.hasOwnProperty(subject)) {
+        if (!this.marks.hasOwnProperty(subject)) {
             return 0;
         }
         return Number((this.marks[subject].reduce((sum, current) => sum + current, 0) / this.marks[subject].length).toFixed(2));
     }
 
     getAverage() {
-        let subject = Object.keys(this.marks);
-        if (subject.length === 0); {
+        let subjects = Object.keys(this.marks);
+        if (subjects.length === 0) {
             return 0;
         }
         return Number((subjects.reduce((sum, current) => sum + this.getAverageBySubject(current), 0) / subjects.length).toFixed(2));
